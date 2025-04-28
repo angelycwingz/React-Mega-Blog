@@ -1,4 +1,3 @@
-import { cache } from "react";
 import conf from "../conf/conf";
 import { Client, Account, ID } from "appwrite";
 
@@ -18,12 +17,15 @@ export class AuthService {
             const userAccount = await this.account.create(ID.unique(), email, password, name);
             if(userAccount) {
                 // call another method
-                return this.login({email, password});
+                console.log("User Account created");
+                await this.login({email, password});
+                return userAccount
+                //return this.login({email, password});
             } else {
                 return userAccount;
             }
         } catch (error) {
-            throw
+            console.log("Appwrite service :: createAccount :: error", error);
         }
     }
 
@@ -34,13 +36,13 @@ export class AuthService {
                 password
             );
         } catch (error) {
-            throw error
+            console.log("Appwrite service :: login :: error", error);
         }
     }
 
     async getCurrentUser() {
         try{
-            return await this.account.get()
+            return await this.account.get();
         } catch (error) {
             console.log("Appwrite service :: getCurrentUser :: error", error);
         }
