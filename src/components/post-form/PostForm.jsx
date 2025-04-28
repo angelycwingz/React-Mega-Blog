@@ -41,7 +41,6 @@ function PostForm({post}){
                     ...data, 
                     userId: userData.$id
                 });
-                console.log(dbPost)
                 if(dbPost) {
                     navigate(`/post/${dbPost.$id}`);
                 }

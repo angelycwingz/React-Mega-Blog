@@ -13,7 +13,6 @@ function EditPost(){
         if(slug) {
             service.getPost(slug).then((post) => {
                 if(post){
-                    console.log(post)
                     setPost(post)
                 }
             })
